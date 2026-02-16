@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjpe1cymdrvjf"]
+
+[ext_resource type="Script" uid="uid://bquf2eoevsgf7" path="res://Scene/main_window.gd" id="1_aurhl"]
+[ext_resource type="PackedScene" uid="uid://d3j2v8ad7ewrn" path="res://Scene/character.tscn" id="1_wxieh"]
+[ext_resource type="PackedScene" uid="uid://80v1f4hr15vh" path="res://Scene/chat_text.tscn" id="3_jp3cc"]
+
+[node name="MainWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_aurhl")
+
+[node name="Character" parent="." instance=ExtResource("1_wxieh")]
+position = Vector2(259, 304)
+scale = Vector2(0.628017, 0.628017)
+
+[node name="ChatText" parent="." instance=ExtResource("3_jp3cc")]
+layout_mode = 1
+
+[node name="Timer" type="Timer" parent="ChatText"]
+
+[connection signal="chat" from="Character" to="." method="_on_character_chat"]
+[connection signal="timeout" from="ChatText/Timer" to="ChatText" method="_on_timer_timeout"]
